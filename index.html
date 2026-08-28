@@ -2,54 +2,1887 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>La mia prima app</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#eef6ff">
+
+  <title>Respira con me</title>
+
+  <link rel="manifest" href="manifest.json">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+      background:
+        linear-gradient(
+          180deg,
+          #eef6ff 0%,
+          #f9fbff 100%
+        );
+
+      color: #26333e;
+    }
+
+    .app {
+      width: min(94%, 650px);
+      margin: 0 auto;
+
+      padding:
+        max(22px, env(safe-area-inset-top))
+        16px
+        max(35px, env(safe-area-inset-bottom));
+
       text-align: center;
-      background: #f4f7fb;
-      padding: 40px 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,.96);
+      border-radius: 30px;
+      padding: 28px 22px;
+
+      box-shadow:
+        0 12px 35px rgba(40,70,100,.10);
+    }
+
+    .hidden {
+      display: none !important;
     }
 
     h1 {
-      font-size: 32px;
+      margin: 0;
+      font-size: clamp(30px, 6vw, 42px);
     }
 
-    p {
-      font-size: 20px;
+    .subtitle {
+      margin: 10px auto 20px;
+      max-width: 500px;
+
+      font-size: 18px;
+      line-height: 1.45;
+
+      color: #65717c;
+    }
+
+    .info {
+      display: inline-block;
+
+      background: #edf4ff;
+
+      border-radius: 999px;
+
+      padding: 9px 16px;
+
+      margin: 5px 0 15px;
+
+      font-size: 15px;
+      font-weight: 650;
     }
 
     button {
-      font-size: 22px;
+      border: 0;
+      border-radius: 18px;
+
       padding: 15px 30px;
-      border: none;
-      border-radius: 15px;
+
+      font-size: 20px;
+      font-weight: 750;
+
       cursor: pointer;
+
+      background: #4d83d9;
+      color: white;
+
+      transition:
+        transform .12s ease,
+        opacity .12s ease;
+    }
+
+    button:active {
+      transform: scale(.97);
+    }
+
+    button:disabled {
+      opacity: .45;
+      cursor: default;
+    }
+
+    .question {
+      margin-top: 25px;
+
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .hint {
+      margin: 7px auto 20px;
+
+      color: #697680;
+
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .scale {
+      display: grid;
+
+      grid-template-columns:
+        repeat(5, 1fr);
+
+      gap: 10px;
+
+      max-width: 470px;
+
+      margin: 25px auto;
+    }
+
+    .rate {
+      width: 100%;
+      min-width: 0;
+
+      aspect-ratio: 1;
+
+      padding: 0;
+
+      border-radius: 18px;
+
+      font-size: 21px;
+      color: #25313a;
+
+      transition:
+        transform .15s ease,
+        outline .15s ease;
+    }
+
+    .rate.selected {
+      outline: 5px solid #25313a;
+      outline-offset: 2px;
+
+      transform: scale(1.07);
+    }
+
+    .green {
+      background: #69ca81;
+    }
+
+    .yellow {
+      background: #f0dc58;
+    }
+
+    .orange {
+      background: #f2a340;
+    }
+
+    .red {
+      background: #e9665d;
+    }
+
+    .selected-value {
+      min-height: 32px;
+
+      margin: 15px 0;
+
+      font-size: 20px;
+      font-weight: 750;
+    }
+
+    .cycle {
+      display: inline-block;
+
+      margin-top: 14px;
+
+      padding: 7px 15px;
+
+      background: #eef4f8;
+
+      border-radius: 999px;
+
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    #phase {
+      min-height: 48px;
+
+      margin-top: 18px;
+
+      font-size:
+        clamp(27px, 6vw, 37px);
+
+      font-weight: 850;
+    }
+
+    #seconds {
+      min-height: 42px;
+
+      font-size: 31px;
+      font-weight: 750;
+
+      color: #66737d;
+    }
+
+    .visual {
+      width: 100%;
+      max-width: 500px;
+
+      margin: 0 auto;
+    }
+
+    svg {
+      display: block;
+
+      width: 100%;
+      height: auto;
+
+      overflow: visible;
+    }
+
+    .breath-path {
+      fill: none;
+
+      stroke: #f5a03b;
+
+      stroke-width: 30;
+
+      stroke-linecap: round;
+    }
+
+    #ball {
+      fill: #35b96f;
+
+      filter:
+        drop-shadow(
+          0 6px 6px rgba(0,0,0,.18)
+        );
+    }
+
+    .guide-label {
+      fill: #68747e;
+
+      font-size: 16px;
+      font-weight: 650;
+    }
+
+    .phaseHint {
+      min-height: 25px;
+
+      margin: 5px 0 15px;
+
+      font-size: 16px;
+
+      color: #6c7882;
+    }
+
+    .progress {
+      width: 80%;
+
+      max-width: 400px;
+
+      height: 10px;
+
+      margin: 18px auto 10px;
+
+      background: #e7edf2;
+
+      border-radius: 20px;
+
+      overflow: hidden;
+    }
+
+    #progressBar {
+      width: 0%;
+      height: 100%;
+
+      background: #35b96f;
+
+      border-radius: inherit;
+
+      transition: width .3s ease;
+    }
+
+    .progress-label {
+      margin-bottom: 20px;
+
+      font-size: 15px;
+
+      color: #6a7680;
+    }
+
+    .controls {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 12px;
+
+      flex-wrap: wrap;
+
+      margin-top: 15px;
+    }
+
+    .stopButton {
+      background: #eef1f4;
+      color: #35414b;
+    }
+
+    .result-box {
+      max-width: 450px;
+
+      margin: 25px auto;
+
+      padding: 22px;
+
+      background: #f5f8fb;
+
+      border-radius: 23px;
+    }
+
+    .comparison {
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+
+      gap: 20px;
+
+      flex-wrap: wrap;
+    }
+
+    .scoreBox {
+      min-width: 120px;
+
+      padding: 15px;
+
+      background: white;
+
+      border-radius: 18px;
+
+      box-shadow:
+        0 4px 15px rgba(30,60,90,.07);
+    }
+
+    .scoreLabel {
+      font-size: 15px;
+      color: #6d7881;
+    }
+
+    .score {
+      margin-top: 4px;
+
+      font-size: 33px;
+      font-weight: 850;
+    }
+
+    .arrow {
+      font-size: 28px;
+    }
+
+    .final-message {
+      margin: 20px 0;
+
+      font-size: 19px;
+      line-height: 1.45;
+    }
+
+    .neutral-note {
+      margin-top: 18px;
+
+      font-size: 14px;
+      line-height: 1.45;
+
+      color: #707b84;
+    }
+
+    @keyframes holding {
+      0%,
+      100% {
+        r: 20;
+        opacity: 1;
+      }
+
+      50% {
+        r: 24;
+        opacity: .8;
+      }
+    }
+
+    #ball.holding {
+      animation:
+        holding 1.2s
+        ease-in-out
+        infinite;
+    }
+
+    @media (max-width: 430px) {
+      .card {
+        padding: 24px 15px;
+      }
+
+      .scale {
+        gap: 7px;
+      }
+
+      .rate {
+        border-radius: 14px;
+        font-size: 19px;
+      }
+
+      .guide-label {
+        font-size: 15px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <h1>La mia prima app 🌟</h1>
+<div class="app">
 
-  <p id="testo">
-    Premi il pulsante
-  </p>
+  <section
+    id="beforeScreen"
+    class="card"
+  >
 
-  <button onclick="saluta()">
-    Inizia
-  </button>
+    <h1>
+      Respira con me 🌿
+    </h1>
 
-  <script>
-    function saluta() {
-      document.getElementById("testo").innerText =
-        "Bravissimo! Hai iniziato 🎉";
+    <div class="subtitle">
+      Prima ascoltiamo come ti senti.
+      Poi faremo insieme tre respiri lenti.
+    </div>
+
+    <div class="info">
+      3 respiri · circa 27 secondi
+    </div>
+
+    <div class="question">
+      Quanta ansia senti adesso?
+    </div>
+
+    <div class="hint">
+      Scegli un numero da 1 a 10.
+      <br><br>
+
+      1 significa poca ansia.
+      <br>
+
+      10 significa ansia molto forte.
+      <br><br>
+
+      I numeri non sono voti.
+    </div>
+
+    <div
+      class="scale"
+      id="beforeScale"
+    >
+
+      <button
+        class="rate green"
+        data-value="1"
+      >
+        1
+      </button>
+
+      <button
+        class="rate green"
+        data-value="2"
+      >
+        2
+      </button>
+
+      <button
+        class="rate yellow"
+        data-value="3"
+      >
+        3
+      </button>
+
+      <button
+        class="rate yellow"
+        data-value="4"
+      >
+        4
+      </button>
+
+      <button
+        class="rate yellow"
+        data-value="5"
+      >
+        5
+      </button>
+
+      <button
+        class="rate orange"
+        data-value="6"
+      >
+        6
+      </button>
+
+      <button
+        class="rate orange"
+        data-value="7"
+      >
+        7
+      </button>
+
+      <button
+        class="rate red"
+        data-value="8"
+      >
+        8
+      </button>
+
+      <button
+        class="rate red"
+        data-value="9"
+      >
+        9
+      </button>
+
+      <button
+        class="rate red"
+        data-value="10"
+      >
+        10
+      </button>
+
+    </div>
+
+    <div
+      id="beforeValue"
+      class="selected-value"
+    >
+    </div>
+
+    <button
+      id="continueButton"
+      disabled
+    >
+      Continua
+    </button>
+
+  </section>
+
+
+  <section
+    id="breathingScreen"
+    class="card hidden"
+  >
+
+    <h1>
+      Segui la pallina
+    </h1>
+
+    <div
+      id="cycleLabel"
+      class="cycle"
+    >
+      Respiro 1 di 3
+    </div>
+
+    <div id="phase">
+      Preparati
+    </div>
+
+    <div id="seconds">
+    </div>
+
+    <div class="visual">
+
+      <svg
+        viewBox="0 0 400 330"
+      >
+
+        <path
+          id="breathPath"
+          class="breath-path"
+
+          d="
+          M 55 285
+          C 90 215,
+            120 65,
+            200 55
+
+          C 280 65,
+            310 215,
+            345 285
+          "
+        />
+
+        <text
+          x="35"
+          y="323"
+          class="guide-label"
+        >
+          Inspira
+        </text>
+
+        <text
+          x="178"
+          y="30"
+          class="guide-label"
+        >
+          Pausa
+        </text>
+
+        <text
+          x="300"
+          y="323"
+          class="guide-label"
+        >
+          Espira
+        </text>
+
+        <circle
+          id="ball"
+          cx="55"
+          cy="285"
+          r="20"
+        >
+        </circle>
+
+      </svg>
+
+    </div>
+
+    <div
+      id="phaseHint"
+      class="phaseHint"
+    >
+      Un respiro alla volta
+    </div>
+
+    <div class="progress">
+
+      <div
+        id="progressBar"
+      >
+      </div>
+
+    </div>
+
+    <div
+      id="progressLabel"
+      class="progress-label"
+    >
+      0 di 3 respiri completati
+    </div>
+
+    <div class="controls">
+
+      <button
+        id="startButton"
+      >
+        Inizia
+      </button>
+
+      <button
+        id="stopButton"
+        class="stopButton"
+      >
+        Interrompi
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <section
+    id="afterScreen"
+    class="card hidden"
+  >
+
+    <h1>
+      Hai finito 🌿
+    </h1>
+
+    <div class="subtitle">
+      Adesso ascolta di nuovo come ti senti.
+    </div>
+
+    <div class="question">
+      Quanta ansia senti adesso?
+    </div>
+
+    <div class="hint">
+      Scegli ancora un numero da 1 a 10.
+    </div>
+
+    <div
+      class="scale"
+      id="afterScale"
+    >
+
+      <button
+        class="rate green"
+        data-value="1"
+      >
+        1
+      </button>
+
+      <button
+        class="rate green"
+        data-value="2"
+      >
+        2
+      </button>
+
+      <button
+        class="rate yellow"
+        data-value="3"
+      >
+        3
+      </button>
+
+      <button
+        class="rate yellow"
+        data-value="4"
+      >
+        4
+      </button>
+
+      <button
+        class="rate yellow"
+        data-value="5"
+      >
+        5
+      </button>
+
+      <button
+        class="rate orange"
+        data-value="6"
+      >
+        6
+      </button>
+
+      <button
+        class="rate orange"
+        data-value="7"
+      >
+        7
+      </button>
+
+      <button
+        class="rate red"
+        data-value="8"
+      >
+        8
+      </button>
+
+      <button
+        class="rate red"
+        data-value="9"
+      >
+        9
+      </button>
+
+      <button
+        class="rate red"
+        data-value="10"
+      >
+        10
+      </button>
+
+    </div>
+
+    <div
+      id="afterValue"
+      class="selected-value"
+    >
+    </div>
+
+    <button
+      id="resultButton"
+      disabled
+    >
+      Vedi il risultato
+    </button>
+
+  </section>
+
+
+  <section
+    id="resultScreen"
+    class="card hidden"
+  >
+
+    <h1>
+      Il tuo respiro 🌿
+    </h1>
+
+    <div class="subtitle">
+      Hai osservato come ti sentivi
+      prima e dopo l'esercizio.
+    </div>
+
+    <div class="result-box">
+
+      <div class="comparison">
+
+        <div class="scoreBox">
+
+          <div class="scoreLabel">
+            Prima
+          </div>
+
+          <div
+            id="beforeResult"
+            class="score"
+          >
+            —
+          </div>
+
+        </div>
+
+        <div class="arrow">
+          →
+        </div>
+
+        <div class="scoreBox">
+
+          <div class="scoreLabel">
+            Dopo
+          </div>
+
+          <div
+            id="afterResult"
+            class="score"
+          >
+            —
+          </div>
+
+        </div>
+
+      </div>
+
+      <div
+        id="finalMessage"
+        class="final-message"
+      >
+      </div>
+
+    </div>
+
+    <button
+      id="restartButton"
+    >
+      Ricomincia
+    </button>
+
+    <div class="neutral-note">
+      Non è necessario sentirsi sempre meglio dopo un esercizio.
+
+      <br><br>
+
+      L'obiettivo è imparare a riconoscere
+      come ci sentiamo e provare una strategia
+      per prenderci cura di noi.
+    </div>
+
+  </section>
+
+</div>
+
+
+<script>
+
+const beforeScreen =
+  document.getElementById("beforeScreen");
+
+const breathingScreen =
+  document.getElementById("breathingScreen");
+
+const afterScreen =
+  document.getElementById("afterScreen");
+
+const resultScreen =
+  document.getElementById("resultScreen");
+
+
+const beforeValueText =
+  document.getElementById("beforeValue");
+
+const afterValueText =
+  document.getElementById("afterValue");
+
+
+const continueButton =
+  document.getElementById("continueButton");
+
+const resultButton =
+  document.getElementById("resultButton");
+
+const startButton =
+  document.getElementById("startButton");
+
+const stopButton =
+  document.getElementById("stopButton");
+
+const restartButton =
+  document.getElementById("restartButton");
+
+
+const phase =
+  document.getElementById("phase");
+
+const phaseHint =
+  document.getElementById("phaseHint");
+
+const seconds =
+  document.getElementById("seconds");
+
+const cycleLabel =
+  document.getElementById("cycleLabel");
+
+const progressBar =
+  document.getElementById("progressBar");
+
+const progressLabel =
+  document.getElementById("progressLabel");
+
+
+const path =
+  document.getElementById("breathPath");
+
+const ball =
+  document.getElementById("ball");
+
+const totalLength =
+  path.getTotalLength();
+
+
+let anxietyBefore = null;
+
+let anxietyAfter = null;
+
+
+const totalCycles = 3;
+
+
+/*
+  TEMPI DELLA RESPIRAZIONE
+*/
+
+const inhaleDuration = 3000;
+
+const holdDuration = 2000;
+
+const exhaleDuration = 4000;
+
+
+let running = false;
+
+let runToken = 0;
+
+
+function showScreen(screen) {
+
+  beforeScreen.classList.add("hidden");
+
+  breathingScreen.classList.add("hidden");
+
+  afterScreen.classList.add("hidden");
+
+  resultScreen.classList.add("hidden");
+
+
+  screen.classList.remove("hidden");
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+function setBallPosition(progress) {
+
+  const point =
+    path.getPointAtLength(
+      totalLength * progress
+    );
+
+
+  ball.setAttribute(
+    "cx",
+    point.x
+  );
+
+
+  ball.setAttribute(
+    "cy",
+    point.y
+  );
+
+}
+
+
+function sleep(milliseconds, token) {
+
+  return new Promise(resolve => {
+
+    const start =
+      performance.now();
+
+
+    function check(now) {
+
+      if (token !== runToken) {
+
+        resolve(false);
+
+        return;
+
+      }
+
+
+      if (
+        now - start >= milliseconds
+      ) {
+
+        resolve(true);
+
+        return;
+
+      }
+
+
+      requestAnimationFrame(check);
+
     }
-  </script>
+
+
+    requestAnimationFrame(check);
+
+  });
+
+}
+
+
+function animatePath(
+  from,
+  to,
+  duration,
+  token
+) {
+
+  return new Promise(resolve => {
+
+    const startTime =
+      performance.now();
+
+
+    function frame(now) {
+
+      if (token !== runToken) {
+
+        resolve(false);
+
+        return;
+
+      }
+
+
+      const elapsed =
+        now - startTime;
+
+
+      const fraction =
+        Math.min(
+          elapsed / duration,
+          1
+        );
+
+
+      const current =
+        from
+        +
+        (to - from)
+        *
+        fraction;
+
+
+      setBallPosition(current);
+
+
+      if (fraction < 1) {
+
+        requestAnimationFrame(frame);
+
+      }
+
+      else {
+
+        resolve(true);
+
+      }
+
+    }
+
+
+    requestAnimationFrame(frame);
+
+  });
+
+}
+
+
+function countdown(
+  duration,
+  token
+) {
+
+  return new Promise(resolve => {
+
+    const startTime =
+      performance.now();
+
+    let previous = null;
+
+
+    function update(now) {
+
+      if (token !== runToken) {
+
+        seconds.textContent = "";
+
+        resolve(false);
+
+        return;
+
+      }
+
+
+      const elapsed =
+        now - startTime;
+
+
+      const remaining =
+        Math.max(
+          0,
+          duration - elapsed
+        );
+
+
+      const number =
+        Math.ceil(
+          remaining / 1000
+        );
+
+
+      if (
+        number !== previous &&
+        number > 0
+      ) {
+
+        seconds.textContent =
+          number;
+
+        previous =
+          number;
+
+      }
+
+
+      if (remaining <= 0) {
+
+        seconds.textContent = "";
+
+        resolve(true);
+
+        return;
+
+      }
+
+
+      requestAnimationFrame(update);
+
+    }
+
+
+    requestAnimationFrame(update);
+
+  });
+
+}
+
+
+/*
+  ANSIA PRIMA
+*/
+
+document
+.querySelectorAll(
+  "#beforeScale .rate"
+)
+.forEach(button => {
+
+  button.addEventListener(
+    "click",
+    function() {
+
+      document
+      .querySelectorAll(
+        "#beforeScale .rate"
+      )
+      .forEach(item => {
+
+        item.classList.remove(
+          "selected"
+        );
+
+      });
+
+
+      this.classList.add(
+        "selected"
+      );
+
+
+      anxietyBefore =
+        Number(
+          this.dataset.value
+        );
+
+
+      beforeValueText.textContent =
+        "Hai scelto "
+        +
+        anxietyBefore
+        +
+        " su 10";
+
+
+      continueButton.disabled =
+        false;
+
+    }
+  );
+
+});
+
+
+continueButton.addEventListener(
+  "click",
+  function() {
+
+    showScreen(
+      breathingScreen
+    );
+
+    resetBreathing();
+
+  }
+);
+
+
+/*
+  RESPIRAZIONE
+*/
+
+async function runBreathing() {
+
+  if (running) {
+    return;
+  }
+
+
+  running = true;
+
+  startButton.disabled = true;
+
+
+  const myToken =
+    ++runToken;
+
+
+  let completedCycles = 0;
+
+
+  for (
+    let cycle = 1;
+    cycle <= totalCycles;
+    cycle++
+  ) {
+
+    if (
+      myToken !== runToken
+    ) {
+      return;
+    }
+
+
+    cycleLabel.textContent =
+      "Respiro "
+      +
+      cycle
+      +
+      " di "
+      +
+      totalCycles;
+
+
+    /*
+      INSPIRA
+      3 SECONDI
+    */
+
+    setBallPosition(0);
+
+
+    phase.textContent =
+      "Inspira lentamente 🌬️";
+
+
+    phaseHint.textContent =
+      "Segui la pallina mentre sale";
+
+
+    await Promise.all([
+
+      animatePath(
+        0,
+        0.5,
+        inhaleDuration,
+        myToken
+      ),
+
+      countdown(
+        inhaleDuration,
+        myToken
+      )
+
+    ]);
+
+
+    if (
+      myToken !== runToken
+    ) {
+      return;
+    }
+
+
+    /*
+      PAUSA
+      2 SECONDI
+    */
+
+    phase.textContent =
+      "Pausa ✨";
+
+
+    phaseHint.textContent =
+      "Resta fermo per un momento";
+
+
+    ball.classList.add(
+      "holding"
+    );
+
+
+    await countdown(
+      holdDuration,
+      myToken
+    );
+
+
+    ball.classList.remove(
+      "holding"
+    );
+
+
+    if (
+      myToken !== runToken
+    ) {
+      return;
+    }
+
+
+    /*
+      ESPIRA
+      4 SECONDI
+    */
+
+    phase.textContent =
+      "Espira lentamente 🍃";
+
+
+    phaseHint.textContent =
+      "Segui la pallina mentre scende";
+
+
+    await Promise.all([
+
+      animatePath(
+        0.5,
+        1,
+        exhaleDuration,
+        myToken
+      ),
+
+      countdown(
+        exhaleDuration,
+        myToken
+      )
+
+    ]);
+
+
+    if (
+      myToken !== runToken
+    ) {
+      return;
+    }
+
+
+    completedCycles++;
+
+
+    progressBar.style.width =
+
+      (
+        completedCycles
+        /
+        totalCycles
+        *
+        100
+      )
+      +
+      "%";
+
+
+    progressLabel.textContent =
+
+      completedCycles
+      +
+      " di "
+      +
+      totalCycles
+      +
+      " respiri completati";
+
+
+    if (
+      cycle < totalCycles
+    ) {
+
+      phase.textContent =
+        "Bene 🌿";
+
+
+      phaseHint.textContent =
+        "Preparati al prossimo respiro";
+
+
+      await sleep(
+        700,
+        myToken
+      );
+
+    }
+
+  }
+
+
+  if (
+    myToken !== runToken
+  ) {
+    return;
+  }
+
+
+  phase.textContent =
+    "Hai finito 🌿";
+
+
+  phaseHint.textContent =
+    "Hai completato tutti i respiri";
+
+
+  seconds.textContent = "";
+
+
+  await sleep(
+    900,
+    myToken
+  );
+
+
+  if (
+    myToken !== runToken
+  ) {
+    return;
+  }
+
+
+  running = false;
+
+
+  showScreen(
+    afterScreen
+  );
+
+}
+
+
+startButton.addEventListener(
+  "click",
+  runBreathing
+);
+
+
+/*
+  INTERROMPI
+*/
+
+stopButton.addEventListener(
+  "click",
+  function() {
+
+    runToken++;
+
+    running = false;
+
+
+    ball.classList.remove(
+      "holding"
+    );
+
+
+    showScreen(
+      beforeScreen
+    );
+
+
+    resetBreathing();
+
+
+    beforeValueText.textContent =
+      anxietyBefore !== null
+      ?
+      "Hai scelto "
+      +
+      anxietyBefore
+      +
+      " su 10"
+      :
+      "";
+
+  }
+);
+
+
+/*
+  ANSIA DOPO
+*/
+
+document
+.querySelectorAll(
+  "#afterScale .rate"
+)
+.forEach(button => {
+
+  button.addEventListener(
+    "click",
+    function() {
+
+      document
+      .querySelectorAll(
+        "#afterScale .rate"
+      )
+      .forEach(item => {
+
+        item.classList.remove(
+          "selected"
+        );
+
+      });
+
+
+      this.classList.add(
+        "selected"
+      );
+
+
+      anxietyAfter =
+        Number(
+          this.dataset.value
+        );
+
+
+      afterValueText.textContent =
+        "Hai scelto "
+        +
+        anxietyAfter
+        +
+        " su 10";
+
+
+      resultButton.disabled =
+        false;
+
+    }
+  );
+
+});
+
+
+/*
+  RISULTATO
+*/
+
+resultButton.addEventListener(
+  "click",
+  function() {
+
+    document
+    .getElementById(
+      "beforeResult"
+    )
+    .textContent =
+      anxietyBefore
+      +
+      "/10";
+
+
+    document
+    .getElementById(
+      "afterResult"
+    )
+    .textContent =
+      anxietyAfter
+      +
+      "/10";
+
+
+    const message =
+      document.getElementById(
+        "finalMessage"
+      );
+
+
+    if (
+      anxietyAfter
+      <
+      anxietyBefore
+    ) {
+
+      message.textContent =
+
+        "La sensazione di ansia "
+        +
+        "è cambiata da "
+        +
+        anxietyBefore
+        +
+        " a "
+        +
+        anxietyAfter
+        +
+        ".";
+
+    }
+
+    else if (
+      anxietyAfter
+      ===
+      anxietyBefore
+    ) {
+
+      message.textContent =
+
+        "Hai indicato lo stesso "
+        +
+        "livello di ansia prima "
+        +
+        "e dopo l'esercizio.";
+
+    }
+
+    else {
+
+      message.textContent =
+
+        "Hai indicato "
+        +
+        anxietyBefore
+        +
+        " prima e "
+        +
+        anxietyAfter
+        +
+        " dopo. "
+        +
+        "Va bene anche quando "
+        +
+        "una sensazione non diminuisce.";
+
+    }
+
+
+    showScreen(
+      resultScreen
+    );
+
+  }
+);
+
+
+/*
+  RESET RESPIRAZIONE
+*/
+
+function resetBreathing() {
+
+  runToken++;
+
+  running = false;
+
+
+  setBallPosition(0);
+
+
+  ball.classList.remove(
+    "holding"
+  );
+
+
+  phase.textContent =
+    "Preparati";
+
+
+  phaseHint.textContent =
+    "Inspira 3 · Pausa 2 · Espira 4";
+
+
+  seconds.textContent = "";
+
+
+  cycleLabel.textContent =
+    "Respiro 1 di 3";
+
+
+  progressBar.style.width =
+    "0%";
+
+
+  progressLabel.textContent =
+    "0 di 3 respiri completati";
+
+
+  startButton.disabled =
+    false;
+
+}
+
+
+/*
+  RICOMINCIA
+*/
+
+restartButton.addEventListener(
+  "click",
+  function() {
+
+    runToken++;
+
+
+    anxietyBefore = null;
+
+    anxietyAfter = null;
+
+    running = false;
+
+
+    document
+    .querySelectorAll(
+      ".rate"
+    )
+    .forEach(button => {
+
+      button.classList.remove(
+        "selected"
+      );
+
+    });
+
+
+    beforeValueText.textContent =
+      "";
+
+
+    afterValueText.textContent =
+      "";
+
+
+    continueButton.disabled =
+      true;
+
+
+    resultButton.disabled =
+      true;
+
+
+    resetBreathing();
+
+
+    showScreen(
+      beforeScreen
+    );
+
+  }
+);
+
+
+setBallPosition(0);
+
+
+/*
+  SERVICE WORKER
+*/
+
+if (
+  "serviceWorker"
+  in navigator
+) {
+
+  window.addEventListener(
+    "load",
+    function() {
+
+      navigator
+      .serviceWorker
+      .register(
+        "sw.js"
+      );
+
+    }
+  );
+
+}
+
+</script>
 
 </body>
 </html>
