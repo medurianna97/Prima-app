@@ -1,0 +1,8 @@
+{
+  "name": "La mia prima app",
+  "short_name": "PrimaApp",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#f4f7fb"
+}

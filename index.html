@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>La mia prima app</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f4f7fb;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 32px;
+    }
+
+    p {
+      font-size: 20px;
+    }
+
+    button {
+      font-size: 22px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>La mia prima app 🌟</h1>
+
+  <p id="testo">
+    Premi il pulsante
+  </p>
+
+  <button onclick="saluta()">
+    Inizia
+  </button>
+
+  <script>
+    function saluta() {
+      document.getElementById("testo").innerText =
+        "Bravissimo! Hai iniziato 🎉";
+    }
+  </script>
+
+</body>
+</html>
