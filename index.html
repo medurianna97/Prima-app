@@ -453,6 +453,65 @@
         font-size: 15px;
       }
     }
+    .journal { margin: 28px 0; text-align: left; }
+    .journal h2 { font-size: 23px; }
+    .journal label { display: block; font-size: 20px; font-weight: 700; }
+    textarea { width: 100%; min-height: 130px; padding: 14px; border: 1px solid #9aabb8; border-radius: 14px; font: inherit; font-size: 18px; resize: vertical; margin: 12px 0; }
+    .journal-note, .history-note { color: #53616e; font-size: 15px; line-height: 1.5; }
+    .history-item { padding: 18px; margin: 14px 0; background: #f5f8fb; border-radius: 18px; text-align: left; }
+    .history-item p { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.5; }
+    .history-item button { font-size: 15px; padding: 10px 16px; }
+    #saveStatus { min-height: 24px; line-height: 1.5; }
+    details.history { margin-top: 25px; text-align: left; }
+    details.history summary { cursor: pointer; font-weight: 750; font-size: 20px; padding: 12px 0; }
+    button:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid #26333e; outline-offset: 4px; }
+    .bistro-invite { margin: 24px 0; padding: 22px; background: #edf4ed; border-radius: 22px; }
+    .bistro-card { background: #fffaf1; border-top: 7px solid #43634c; }
+    .bistro-card h1 { color: #314f3b; }
+    .bistro-tag { text-transform: uppercase; letter-spacing: 2px; font-size: 13px; font-weight: 750; color: #63735d; }
+    .order-ticket { margin: 22px 0; padding: 20px; background: white; border: 1px solid #dedbcf; border-radius: 14px; text-align: left; }
+    .order-ticket h2 { margin: 8px 0; font-size: 24px; }
+    .order-ticket p { margin: 8px 0; line-height: 1.6; }
+    .kitchen-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .ingredient { padding: 13px 5px; background: white; border: 2px solid #d9dfd4; color: #304636; font-size: 15px; font-weight: 650; border-radius: 15px; }
+    .ingredient span { display: block; font-size: 29px; margin-bottom: 6px; }
+    .ingredient[aria-pressed="true"] { background: #dfeede; border-color: #43634c; box-shadow: inset 0 0 0 1px #43634c; }
+    .serving-plate { min-height: 135px; max-width: 300px; padding: 22px; margin: 22px auto 12px; background: #fff; border: 9px double #d9ddd3; border-radius: 50%; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; }
+    .serving-plate span { font-size: 32px; }
+    #plateDescription { font-size: 15px; line-height: 1.6; color: #53614d; min-height: 24px; }
+    #kitchenFeedback { min-height: 55px; line-height: 1.5; font-weight: 650; margin: 18px 0; }
+    .kitchen-primary { background: #43634c; }
+    .kitchen-finish { padding: 30px 0; }
+    .kitchen-finish h2 { font-size: 28px; }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+
+    .restaurant-scene { position: relative; height: 290px; overflow: hidden; margin: 22px -8px 10px; border-radius: 23px; background: linear-gradient(#e6eedf 0 68%, #ba8860 68% 74%, #856246 74%); border: 1px solid #cdd8c4; }
+    .restaurant-scene:before { content: "IL PICCOLO BISTROT"; position: absolute; top: 12px; left: 18px; font-size: 11px; font-weight: 800; letter-spacing: 2px; color: #43634c; }
+    .scene-window { position: absolute; top: 38px; left: 17px; width: 76px; height: 85px; border: 6px solid #fffdf4; border-radius: 35px 35px 0 0; background: linear-gradient(125deg,#bddce1,#f8f3ce); }
+    .character { position: absolute; width: 115px; height: 170px; bottom: 61px; }
+    #chefCharacter { left: 10px; transform-origin: bottom center; }
+    #customerCharacter { right: 12px; }
+    .speech-bubble { position: absolute; right: 10px; top: 15px; width: 61%; padding: 13px; background: #fffdf6; border: 2px solid #d7b887; border-radius: 18px 18px 3px 18px; font-size: 14px; line-height: 1.35; text-align: left; z-index: 2; }
+    .scene-counter { position: absolute; bottom: 0; height: 67px; width: 100%; border-top: 8px solid #e0b382; background: repeating-linear-gradient(90deg,#a27350 0 55px,#986949 56px 58px); }
+    #sceneDish { position: absolute; left: 27%; bottom: 45px; z-index: 3; background: white; border: 4px solid #e8e5d9; border-radius: 50%; padding: 4px 14px; font-size: 33px; transition: left .9s ease, transform .9s ease; }
+    #sceneDish.delivered { left: 70%; transform: scale(.88); }
+    #chefCharacter.working { animation: chef-work .45s ease-in-out 3; }
+    #customerCharacter.happy { animation: customer-happy .5s ease-in-out 2; }
+    .service-steps { display:flex; gap:6px; justify-content:center; margin:16px 0; }
+    .service-steps span { flex:1; font-size:13px; border-radius:20px; padding:9px 3px; background:#ebece3; color:#52604c; }
+    .service-steps .active { background:#43634c; color:white; font-weight:750; }
+    .serving-plate { transition: transform .4s; }
+    .serving-plate.prepared { box-shadow: 0 0 0 5px #dce9cc; }
+    .serving-plate.preparing { animation: prep-dish .55s ease-in-out 2; }
+    .serving-plate span:last-child { animation: topping-in .3s ease-out; }
+    .ingredient { min-height:84px; box-shadow:0 4px 0 #d2d8c9; }
+    .ingredient:active { transform:translateY(3px); box-shadow:none; }
+    #kitchenAction { margin: 15px 0 0; }
+    @keyframes chef-work { 50% { transform:rotate(-7deg) translateY(-3px); } }
+    @keyframes customer-happy { 50% { transform:translateY(-7px); } }
+    @keyframes prep-dish { 25% { transform:rotate(-5deg); } 75% { transform:rotate(5deg); } }
+    @keyframes topping-in { from { transform:translateY(-28px) scale(.5); opacity:0; } to { transform:translateY(0) scale(1); opacity:1; } }
+    @media (prefers-reduced-motion:reduce) { .character, .serving-plate, .serving-plate span { animation:none !important; } #sceneDish { transition:none; } }
   </style>
 </head>
 
@@ -888,6 +947,23 @@
 
     </div>
 
+    <section class="journal" aria-labelledby="journalTitle">
+      <h2 id="journalTitle">Un momento per raccontarti</h2>
+      <label for="anxietyReason">Che cosa ti ha fatto sentire in ansia?</label>
+      <p class="journal-note">Puoi raccontare cosa è successo o quale pensiero ti ha preoccupato. Se non lo sai, va bene scrivere anche questo.</p>
+      <textarea id="anxietyReason" maxlength="5000" placeholder="Mi sono sentito in ansia perché…"></textarea>
+      <button id="saveEntryButton">Salva nello storico</button>
+      <p id="saveStatus" role="status" aria-live="polite"></p>
+    </section>
+
+    <div id="bistroInvite" class="bistro-invite hidden">
+      <h2>Ti va di aprire il tuo ristorante?</h2>
+      <p>Tre ordinazioni da preparare, con i tuoi tempi.</p>
+      <div class="controls">
+        <button id="openBistro" class="kitchen-primary">Apri il bistrot</button>
+        <button id="finishToday" class="stopButton">Per oggi ho finito</button>
+      </div>
+    </div>
     <button
       id="restartButton"
     >
@@ -906,6 +982,73 @@
 
   </section>
 
+  <section id="bistroScreen" class="card bistro-card hidden" aria-labelledby="bistroTitle">
+    <div class="bistro-tag">La tua cucina · con calma</div>
+    <h1 id="bistroTitle">Il piccolo bistrot</h1>
+    <div id="kitchenWork">
+      <div class="restaurant-scene" role="img" aria-label="Il cuoco al bancone e un cliente in attesa del piatto">
+        <div class="scene-window"></div>
+        <div id="customerSpeech" class="speech-bubble" aria-live="polite"></div>
+        <svg id="chefCharacter" class="character" viewBox="0 0 120 180" aria-hidden="true">
+          <path d="M22 171V123Q25 99 60 100Q95 99 98 123V171" fill="#faf8ef" stroke="#d1d8c6" stroke-width="2"/>
+          <path d="M40 110L60 130L80 110V171H40Z" fill="#44644e"/>
+          <path d="M23 126L10 154M97 126L107 149" stroke="#e3ad81" stroke-width="13" stroke-linecap="round"/>
+          <rect x="50" y="85" width="20" height="24" rx="8" fill="#d6a078"/>
+          <ellipse cx="60" cy="68" rx="31" ry="35" fill="#e7b48c"/>
+          <path d="M30 57Q24 25 60 26Q97 27 91 57L80 43Q60 51 39 43Z" fill="#3f3028"/>
+          <circle cx="49" cy="66" r="3" fill="#302c26"/><circle cx="72" cy="66" r="3" fill="#302c26"/>
+          <path d="M49 81Q60 91 72 81" fill="none" stroke="#774a37" stroke-width="3" stroke-linecap="round"/>
+          <path d="M34 37V20Q15 3 34 -2Q46 -10 54 1Q67 -14 81 0Q106 -3 94 21V37Z" transform="translate(0 9)" fill="#fff" stroke="#d1d8c6" stroke-width="2"/>
+          <path d="M36 44H92" stroke="#d1d8c6" stroke-width="3"/>
+          <circle cx="60" cy="143" r="3" fill="#d9b76f"/>
+        </svg>
+        <svg id="customerCharacter" class="character" viewBox="0 0 120 180" aria-hidden="true">
+          <path d="M22 175V128Q25 104 60 104Q95 104 98 128V175" fill="#b96646"/>
+          <path d="M23 134L14 166M97 134L105 166" stroke="#b97653" stroke-width="13" stroke-linecap="round"/>
+          <rect x="50" y="91" width="20" height="25" rx="8" fill="#a96544"/>
+          <ellipse cx="60" cy="73" rx="31" ry="35" fill="#bd805b"/>
+          <path d="M29 67Q17 26 57 28Q99 25 91 66L79 47Q54 61 34 48Z" fill="#342e2b"/>
+          <circle cx="49" cy="73" r="3" fill="#292622"/><circle cx="72" cy="73" r="3" fill="#292622"/>
+          <path d="M49 88Q60 98 72 88" fill="none" stroke="#623d2f" stroke-width="3" stroke-linecap="round"/>
+          <path d="M40 111L59 126L80 111" fill="none" stroke="#efd3ae" stroke-width="4"/>
+        </svg>
+        <div class="scene-counter"></div><div id="sceneDish">🍽️</div>
+      </div>
+      <div class="service-steps" aria-label="Fasi della preparazione"><span id="stepChoose" class="active">1. Ingredienti</span><span id="stepPrepare">2. Prepara</span><span id="stepServe">3. Servi</span></div>
+
+      <div class="order-ticket">
+        <div id="orderProgress" class="bistro-tag"></div>
+        <h2 id="orderTitle"></h2>
+        <p id="orderRequest"></p>
+      </div>
+      <p class="hint">Tocca un ingrediente per aggiungerlo. Toccalo di nuovo per toglierlo. La base è già pronta.</p>
+      <div id="ingredientChoices" class="kitchen-grid" aria-label="Ingredienti disponibili"></div>
+      <div id="servingPlate" class="serving-plate" aria-hidden="true"></div>
+      <p id="plateDescription" aria-live="polite"></p>
+      <button id="kitchenAction" class="kitchen-primary">Prepara il piatto</button>
+      <p id="kitchenFeedback" role="status" aria-live="polite"></p>
+      <div class="controls">
+        <button id="serveDish" class="kitchen-primary">Servi il piatto</button>
+        <button id="nextOrder" class="kitchen-primary hidden">Prossimo ordine</button>
+      </div>
+    </div>
+    <div id="kitchenDone" class="kitchen-finish hidden">
+      <h2>Tre piatti serviti!</h2>
+      <p>Hai completato le ordinazioni del tuo bistrot.</p>
+      <button id="moreOrders" class="kitchen-primary">Altri tre ordini</button>
+    </div>
+    <div class="controls"><button id="closeBistro" class="stopButton">Chiudi il bistrot</button></div>
+  </section>
+  <section id="goodbyeScreen" class="card hidden">
+    <h1>Per oggi hai finito 🌿</h1>
+    <p class="subtitle">La tua risposta è nello storico. Puoi tornare quando vuoi.</p>
+    <button id="backToStart">Torna all’inizio</button>
+  </section>
+  <details class="card history" id="historyPanel">
+    <summary>Il mio storico (<span id="historyCount">0</span>)</summary>
+    <p class="history-note">Le risposte restano in questo browser su questo dispositivo. Non vengono inviate ad altre persone e non si sincronizzano con altri dispositivi. Chi usa questo browser può leggerle. Cancellando i dati del browser, lo storico può andare perso.</p>
+    <div id="historyList"></div>
+  </details>
 </div>
 
 
@@ -1001,6 +1144,8 @@ let runToken = 0;
 
 
 function showScreen(screen) {
+  document.getElementById("bistroScreen").classList.add("hidden");
+  document.getElementById("goodbyeScreen").classList.add("hidden");
 
   beforeScreen.classList.add("hidden");
 
@@ -1811,6 +1956,14 @@ restartButton.addEventListener(
   "click",
   function() {
 
+    if (reasonInput.value.trim() && reasonInput.value.trim() !== savedReason &&
+        !window.confirm("La risposta non è stata salvata. Vuoi ricominciare senza salvarla?")) return;
+    document.getElementById("bistroInvite").classList.add("hidden");
+    reasonInput.value = "";
+    savedReason = "";
+    currentEntryId = null;
+    saveStatus.textContent = "";
+    saveEntryButton.textContent = "Salva nello storico";
     runToken++;
 
 
@@ -1861,6 +2014,272 @@ restartButton.addEventListener(
 );
 
 
+const historyKey = "respira-con-me.history.v1";
+const reasonInput = document.getElementById("anxietyReason");
+const saveEntryButton = document.getElementById("saveEntryButton");
+const saveStatus = document.getElementById("saveStatus");
+let currentEntryId = null;
+let savedReason = "";
+
+function readHistory() {
+  const entries = JSON.parse(localStorage.getItem(historyKey) || "[]");
+  if (!Array.isArray(entries) || entries.some(entry =>
+    !entry || typeof entry.id !== "string" || typeof entry.reason !== "string" ||
+    !Number.isFinite(Date.parse(entry.date)) ||
+    !Number.isInteger(entry.before) || entry.before < 1 || entry.before > 10 ||
+    !Number.isInteger(entry.after) || entry.after < 1 || entry.after > 10
+  )) throw new Error("Storico non leggibile");
+  return entries;
+}
+
+function renderHistory() {
+  const list = document.getElementById("historyList");
+  list.replaceChildren();
+  let entries;
+  try { entries = readHistory(); }
+  catch (_) {
+    document.getElementById("historyCount").textContent = "—";
+    list.textContent = "Non riesco a leggere lo storico in questo browser. I dati esistenti non sono stati modificati.";
+    return;
+  }
+  document.getElementById("historyCount").textContent = entries.length;
+  if (!entries.length) list.textContent = "Non hai ancora salvato nessuna risposta.";
+  [...entries].sort((a, b) => Date.parse(b.date) - Date.parse(a.date)).forEach(entry => {
+    const article = document.createElement("article");
+    article.className = "history-item";
+    const heading = document.createElement("h3");
+    heading.textContent = new Date(entry.date).toLocaleString("it-IT", { dateStyle: "medium", timeStyle: "short" });
+    const scores = document.createElement("p");
+    scores.textContent = `Ansia prima: ${entry.before}/10 · Dopo: ${entry.after}/10`;
+    const reason = document.createElement("p");
+    reason.textContent = entry.reason;
+    const remove = document.createElement("button");
+    remove.className = "stopButton";
+    remove.textContent = "Elimina questa risposta";
+    remove.addEventListener("click", () => {
+      if (!window.confirm("Vuoi eliminare questa risposta dallo storico?")) return;
+      try {
+        localStorage.setItem(historyKey, JSON.stringify(readHistory().filter(item => item.id !== entry.id)));
+        if (currentEntryId === entry.id) {
+          document.getElementById("bistroInvite").classList.add("hidden");
+          currentEntryId = null;
+          savedReason = "";
+          saveStatus.textContent = "Risposta eliminata dallo storico.";
+          saveEntryButton.textContent = "Salva nello storico";
+        }
+        renderHistory();
+      } catch (_) { window.alert("Non è stato possibile eliminare la risposta. Riprova."); }
+    });
+    article.append(heading, scores, reason, remove);
+    list.append(article);
+  });
+}
+
+reasonInput.addEventListener("input", () => { saveStatus.textContent = ""; });
+saveEntryButton.addEventListener("click", () => {
+  const reason = reasonInput.value.trim();
+  if (!reason) {
+    saveStatus.textContent = "Scrivi una risposta prima di salvare.";
+    reasonInput.focus();
+    return;
+  }
+  if (anxietyBefore === null || anxietyAfter === null) return;
+  try {
+    const entries = readHistory();
+    const existing = entries.find(entry => entry.id === currentEntryId);
+    const entry = {
+      id: currentEntryId || crypto.randomUUID(),
+      date: existing ? existing.date : new Date().toISOString(),
+      before: anxietyBefore, after: anxietyAfter, reason
+    };
+    const index = entries.findIndex(item => item.id === entry.id);
+    if (index < 0) entries.push(entry); else entries[index] = entry;
+    localStorage.setItem(historyKey, JSON.stringify(entries));
+    currentEntryId = entry.id;
+    savedReason = reason;
+    saveStatus.textContent = "Risposta salvata. La trovi nel tuo storico.";
+    document.getElementById("bistroInvite").classList.remove("hidden");
+    saveEntryButton.textContent = "Aggiorna la risposta";
+    renderHistory();
+  } catch (_) {
+    saveStatus.textContent = "Non è stato possibile salvare. Il browser potrebbe avere lo spazio pieno o il salvataggio disattivato. Copia la risposta per non perderla.";
+  }
+});
+window.addEventListener("storage", event => {
+  if (event.key === historyKey || event.key === null) renderHistory();
+});
+window.addEventListener("beforeunload", event => {
+  if (reasonInput.value.trim() && reasonInput.value.trim() !== savedReason) {
+    event.preventDefault();
+    event.returnValue = "";
+  }
+});
+
+const ingredients = [
+  {id:"tomato", name:"Pomodoro", icon:"🍅"},
+  {id:"mozzarella", name:"Mozzarella", icon:"⚪"},
+  {id:"lettuce", name:"Insalata", icon:"🥬"},
+  {id:"mushrooms", name:"Funghi", icon:"🍄"},
+  {id:"olives", name:"Olive", icon:"🫒"},
+  {id:"cheese", name:"Formaggio", icon:"🧀"},
+  {id:"egg", name:"Uovo", icon:"🥚"},
+  {id:"carrot", name:"Carota", icon:"🥕"},
+  {id:"basil", name:"Basilico", icon:"🌿"}
+];
+const menu = [
+  {name:"Panino mediterraneo", base:"Pane", icon:"🥖", items:["tomato","mozzarella","lettuce"]},
+  {name:"Pizza ai funghi", base:"Base della pizza", icon:"🫓", items:["tomato","mozzarella","mushrooms"]},
+  {name:"Insalata colorata", base:"Ciotola di insalata", icon:"🥗", items:["lettuce","carrot","olives"]},
+  {name:"Panino al formaggio", base:"Pane", icon:"🥖", items:["cheese","tomato","lettuce"]},
+  {name:"Pizza margherita", base:"Base della pizza", icon:"🫓", items:["tomato","mozzarella","basil"]},
+  {name:"Insalata con uovo", base:"Ciotola di insalata", icon:"🥗", items:["lettuce","egg","tomato"]}
+];
+let orderIndex = 0;
+let roundIndex = 0;
+let selectedIngredients = new Set();
+let dishServed = false;
+let dishPrepared = false;
+function setKitchenStep(step) {
+  ["Choose", "Prepare", "Serve"].forEach(name => {
+    const el = document.getElementById("step" + name);
+    el.classList.remove("active");
+    if (name === step) { el.classList.add("active"); el.setAttribute("aria-current", "step"); }
+    else el.removeAttribute("aria-current");
+  });
+}
+function currentOrder() { return menu[(roundIndex * 3 + orderIndex) % menu.length]; }
+function ingredientNames(ids) { return ids.map(id => ingredients.find(item => item.id === id).name.toLowerCase()).join(", "); }
+function renderPlate() {
+  const plate = document.getElementById("servingPlate");
+  plate.replaceChildren();
+  const base = document.createElement("span");
+  base.textContent = currentOrder().icon;
+  plate.append(base);
+  ingredients.filter(item => selectedIngredients.has(item.id)).forEach(item => {
+    const topping = document.createElement("span"); topping.textContent = item.icon; plate.append(topping);
+  });
+  document.getElementById("plateDescription").textContent = selectedIngredients.size
+    ? "Nel piatto: " + ingredientNames([...selectedIngredients]) + "."
+    : "La base è pronta. Scegli gli ingredienti dell’ordine.";
+}
+function prepareOrder() {
+  dishServed = false;
+  dishPrepared = false;
+  selectedIngredients = new Set();
+  const order = currentOrder();
+  document.getElementById("customerSpeech").textContent = "Ciao! Vorrei: " + order.name.toLowerCase() + ".";
+  document.getElementById("sceneDish").textContent = "🍽️";
+  document.getElementById("sceneDish").classList.remove("delivered");
+  document.getElementById("customerCharacter").classList.remove("happy");
+  document.getElementById("servingPlate").classList.remove("prepared", "preparing");
+  document.getElementById("chefCharacter").classList.remove("working");
+  document.getElementById("kitchenAction").classList.remove("hidden");
+  document.getElementById("kitchenAction").textContent = order.name.startsWith("Pizza") ? "Inforna la pizza" : order.name.startsWith("Panino") ? "Chiudi il panino" : "Mescola l’insalata";
+  setKitchenStep("Choose");
+  document.getElementById("orderProgress").textContent = `Ordinazione ${orderIndex + 1} di 3`;
+  document.getElementById("orderTitle").textContent = order.name;
+  document.getElementById("orderRequest").textContent = "Ingredienti richiesti: " + ingredientNames(order.items) + ".";
+  document.getElementById("kitchenFeedback").textContent = "";
+  document.getElementById("serveDish").classList.add("hidden");
+  document.getElementById("nextOrder").classList.add("hidden");
+  const choices = document.getElementById("ingredientChoices");
+  choices.replaceChildren();
+  ingredients.forEach(item => {
+    const button = document.createElement("button");
+    button.className = "ingredient";
+    button.setAttribute("aria-pressed", "false");
+    button.dataset.ingredient = item.id;
+    const icon = document.createElement("span"); icon.textContent = item.icon; icon.setAttribute("aria-hidden", "true");
+    const label = document.createTextNode(item.name);
+    button.append(icon, label);
+    button.addEventListener("click", () => {
+      if (dishServed || dishPrepared) return;
+      if (selectedIngredients.has(item.id)) selectedIngredients.delete(item.id); else selectedIngredients.add(item.id);
+      button.setAttribute("aria-pressed", String(selectedIngredients.has(item.id)));
+      document.getElementById("kitchenFeedback").textContent = "";
+      renderPlate();
+      document.getElementById("sceneDish").textContent = currentOrder().icon;
+      setKitchenStep("Prepare");
+    });
+    choices.append(button);
+  });
+  renderPlate();
+}
+function startKitchen() {
+  orderIndex = 0;
+  document.getElementById("kitchenWork").classList.remove("hidden");
+  document.getElementById("kitchenDone").classList.add("hidden");
+  prepareOrder();
+  showScreen(document.getElementById("bistroScreen"));
+}
+document.getElementById("openBistro").addEventListener("click", () => {
+  if (reasonInput.value.trim() !== savedReason) {
+    saveStatus.textContent = "Hai modificato la risposta: salvala prima di aprire il bistrot.";
+    return;
+  }
+  roundIndex = 0;
+  startKitchen();
+});
+document.getElementById("kitchenAction").addEventListener("click", () => {
+  if (dishServed || dishPrepared) return;
+  const order = currentOrder();
+  const missing = order.items.filter(id => !selectedIngredients.has(id));
+  const extra = [...selectedIngredients].filter(id => !order.items.includes(id));
+  const feedback = document.getElementById("kitchenFeedback");
+  if (missing.length || extra.length) {
+    feedback.textContent = [missing.length ? "Da aggiungere: " + ingredientNames(missing) + "." : "", extra.length ? "L’ordine non prevede: " + ingredientNames(extra) + ". Tocca questi ingredienti per toglierli." : ""].filter(Boolean).join(" ");
+    return;
+  }
+  dishPrepared = true;
+  document.querySelectorAll("#ingredientChoices button").forEach(button => { button.disabled = true; });
+  document.getElementById("chefCharacter").classList.add("working");
+  document.getElementById("servingPlate").classList.add("preparing", "prepared");
+  document.getElementById("sceneDish").textContent = order.name.startsWith("Pizza") ? "🍕" : order.name.startsWith("Panino") ? "🥪" : "🥗";
+  feedback.textContent = order.name.startsWith("Pizza") ? "Pizza sfornata! Ora puoi servirla al cliente." : order.name.startsWith("Panino") ? "Panino pronto! Ora puoi servirlo al cliente." : "Insalata mescolata! Ora puoi servirla al cliente.";
+  document.getElementById("kitchenAction").classList.add("hidden");
+  document.getElementById("serveDish").classList.remove("hidden");
+  setKitchenStep("Serve");
+  document.getElementById("serveDish").focus();
+});
+document.getElementById("serveDish").addEventListener("click", () => {
+  if (dishServed || !dishPrepared) return;
+  const feedback = document.getElementById("kitchenFeedback");
+  document.getElementById("sceneDish").classList.add("delivered");
+  document.getElementById("customerCharacter").classList.add("happy");
+  document.getElementById("customerSpeech").textContent = "Grazie! È proprio quello che avevo ordinato.";
+  dishServed = true;
+  feedback.textContent = "Piatto pronto e servito! Hai preparato tutti gli ingredienti richiesti.";
+  document.querySelectorAll("#ingredientChoices button").forEach(button => { button.disabled = true; });
+  document.getElementById("serveDish").classList.add("hidden");
+  const next = document.getElementById("nextOrder");
+  next.textContent = orderIndex === 2 ? "Completa il servizio" : "Prossimo ordine";
+  next.classList.remove("hidden");
+  next.focus();
+});
+document.getElementById("nextOrder").addEventListener("click", () => {
+  if (!dishServed) return;
+  if (orderIndex === 2) {
+    document.getElementById("kitchenWork").classList.add("hidden");
+    document.getElementById("kitchenDone").classList.remove("hidden");
+    document.getElementById("moreOrders").focus();
+  } else {
+    orderIndex++;
+    prepareOrder();
+    document.querySelector("#ingredientChoices button").focus();
+  }
+});
+document.getElementById("moreOrders").addEventListener("click", () => { roundIndex++; startKitchen(); });
+document.getElementById("closeBistro").addEventListener("click", () => { showScreen(document.getElementById("goodbyeScreen")); });
+document.getElementById("finishToday").addEventListener("click", () => {
+  if (reasonInput.value.trim() !== savedReason) {
+    saveStatus.textContent = "Hai modificato la risposta: salvala prima di finire.";
+    return;
+  }
+  showScreen(document.getElementById("goodbyeScreen"));
+});
+document.getElementById("backToStart").addEventListener("click", () => { restartButton.click(); });
+
+renderHistory();
 setBallPosition(0);
 
 
